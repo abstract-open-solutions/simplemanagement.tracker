@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object
+    name="Story"
+    meta_type="Dexterity FTI"
+    i18n:domain="simplemanagement.tracker"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+ <!-- enabled behaviors -->
+ <property name="behaviors" purge="False">
+     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+ </property>
+
+</object>

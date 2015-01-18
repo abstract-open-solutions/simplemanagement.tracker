@@ -1,0 +1,50 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="simplemanagement.tracker">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="simplemanagement.tracker"
+      directory="profiles/default"
+      description="Installs the simplemanagement.tracker package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <!-- -*- extra stuff goes here -*- -->
+
+  <include package=".browser" />
+  <include package="archetypes.schemaextender" />
+
+  <adapter
+    factory=".extenders.StoryExtender"
+    provides="archetypes.schemaextender.interfaces.ISchemaExtender"
+    name="sm_story"
+    />
+
+  <adapter
+    factory=".extenders.StoryExtender"
+    provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+    name="sm_story"
+    />
+
+  <utility
+    name="sm.tracker.project_stories"
+    factory=".vocabularies.Stories"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+  <subscriber
+    for="collective.simplemanagement.interfaces.IBooking
+         collective.simplemanagement.booking.events.IBookingAddedEvent"
+    handler=".subscribers.booking_added"
+    />
+
+  <subscriber
+    for="Products.Poi.interfaces.IIssue
+         Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".subscribers.mail_issue_change"
+    />
+
+</configure>

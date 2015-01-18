@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="simplemanagement.tracker">
+
+  <include package=".notifications" />
+  <include package="z3c.jbot" file="meta.zcml" />
+
+  <browser:jbot
+    directory="template_overrides"
+    layer="..interfaces.ILayer"
+    />
+
+  <browser:page
+    for="Products.Poi.interfaces.IIssue"
+    name="sm-tracker-helpers"
+    class=".helpers.Helpers"
+    layer="..interfaces.ILayer"
+    permission="zope2.View"
+    allowed_attributes="story debugme"
+    />
+
+  <browser:page
+    for="Products.Poi.interfaces.IIssue"
+    name="issue_stories_base_query_getter"
+    class=".views.IssueStoriesQueryGetter"
+    layer="..interfaces.ILayer"
+    permission="zope2.View"
+    />
+
+</configure>

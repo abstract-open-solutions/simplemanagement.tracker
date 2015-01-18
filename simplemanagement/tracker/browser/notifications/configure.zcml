@@ -1,0 +1,19 @@
+<configure
+   xmlns="http://namespaces.zope.org/five"
+   xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+     name="resolved-stage-issue-mail"
+     for="Products.Poi.interfaces.IIssue"
+     permission="zope2.View"
+     class=".views.ResolvedStageIssueMail"
+     />
+
+  <browser:page
+     name="resolved-prod-issue-mail"
+     for="Products.Poi.interfaces.IIssue"
+     permission="zope2.View"
+     class=".views.ResolvedProdIssueMail"
+     />
+
+</configure>
