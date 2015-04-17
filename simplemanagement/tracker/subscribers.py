@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from plone.app.uuid.utils import uuidToObject
 
@@ -8,12 +8,13 @@ from .extenders import STORY_FIELDNAME
 
 
 def booking_added(booking, evt):
-    """ track ticket ref on booking
+    """ track ticket story on booking
     """
-    ticket = uuidToObject(booking.ticket)
-    field = ticket.getField(STORY_FIELDNAME)
-    story = field and field.get(ticket) or None
-    booking.add_reference(story.portal_type, story.UID())
+    if booking.ticket:
+        ticket = uuidToObject(booking.ticket)
+        field = ticket.getField(STORY_FIELDNAME)
+        story = field and field.get(ticket) or None
+        booking.add_reference(story.portal_type, story.UID())
 
 
 def mail_issue_change(object, event):
