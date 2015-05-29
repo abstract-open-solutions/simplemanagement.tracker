@@ -156,12 +156,12 @@
       <tr tal:define="deadline helpers/deadline">
         <th i18n:translate="poi_label_deadline">Deadline</th>
         <td tal:condition="deadline" tal:content="python:here.toLocalizedTime(deadline)" />
-        <td tal:condition="not:deadline" i18n:translate="poi_label_novalue">&mdash;</td>
+        <td tal:condition="not:deadline"><div style="text-align:center">&mdash;</div></td>
       </tr>
       <tr tal:define="estimate helpers/estimate">
         <th i18n:translate="poi_label_estimate">Estimate</th>
         <td tal:condition="estimate" tal:content="estimate" />
-        <td tal:condition="not:estimate" i18n:translate="poi_label_novalue">&mdash;</td>
+        <td tal:condition="not:estimate"><div style="text-align:center">&mdash;</div></td>
       </tr>
     </table>
 

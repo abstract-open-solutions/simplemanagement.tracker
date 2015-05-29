@@ -1,5 +1,4 @@
 #-*- coding: utf-8 -*-
-from DateTime import DateTime
 from zope.component import adapts
 from zope.interface import implements
 
@@ -65,7 +64,6 @@ class StoryExtender(object):
         _ExtensionDatetimeField(
             DEADLINE_FIELDNAME,
             required=False,
-            default_method=DateTime,
             widget=atapi.CalendarWidget(
                 description='',
                 label=_(u'Deadline')
@@ -74,7 +72,6 @@ class StoryExtender(object):
         _ExtensionFixedPointField(
             ESTIMATE_FIELDNAME,
             required=False,
-            default='0.0',
             widget=atapi.DecimalWidget(
                 description='',
                 label=_(u'Estimate')
