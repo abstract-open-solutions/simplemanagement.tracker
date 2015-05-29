@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-
+from DateTime import DateTime
 from zope.component import adapts
 from zope.interface import implements
 
@@ -18,9 +18,19 @@ from . import _
 
 
 STORY_FIELDNAME = "sm_story"
+DEADLINE_FIELDNAME = "sm_deadline"
+ESTIMATE_FIELDNAME = "sm_estimate"
 
 
 class _ExtensionReferenceField(ExtensionField, atapi.ReferenceField):
+    pass
+
+
+class _ExtensionFixedPointField(ExtensionField, atapi.FixedPointField):
+    pass
+
+
+class _ExtensionDatetimeField(ExtensionField, atapi.DateTimeField):
     pass
 
 
@@ -51,6 +61,24 @@ class StoryExtender(object):
                 base_query='issue_stories_base_query_getter',
             )
 
+        ),
+        _ExtensionDatetimeField(
+            DEADLINE_FIELDNAME,
+            required=False,
+            default_method=DateTime,
+            widget=atapi.CalendarWidget(
+                description='',
+                label=_(u'Deadline')
+            )
+        ),
+        _ExtensionFixedPointField(
+            ESTIMATE_FIELDNAME,
+            required=False,
+            default='0.0',
+            widget=atapi.DecimalWidget(
+                description='',
+                label=_(u'Estimate')
+            )
         ),
     ]
 

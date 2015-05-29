@@ -57,10 +57,10 @@
                   (here.aq_parent.absolute_url(), '&amp;state='.join(activeStates),);">
 
     <table class="vertical listing issue-info-box"
-           tal:define="releases here/getReleasesVocab">
+           tal:define="releases here/getReleasesVocab;
+                       helpers context/@@sm-tracker-helpers;">
       <tal:story
-          define="helpers context/@@sm-tracker-helpers;
-                  story   helpers/story"
+          define="story   helpers/story"
           i18n:domain="simplemanagement.tracker">
         <tr tal:condition="story">
           <th i18n:translate="">Story</th>
@@ -152,6 +152,16 @@
             &#8212;
           </div>
         </td>
+      </tr>
+      <tr tal:define="deadline helpers/deadline">
+        <th i18n:translate="poi_label_deadline">Deadline</th>
+        <td tal:condition="deadline" tal:content="python:here.toLocalizedTime(deadline)" />
+        <td tal:condition="not:deadline" i18n:translate="poi_label_novalue">&mdash;</td>
+      </tr>
+      <tr tal:define="estimate helpers/estimate">
+        <th i18n:translate="poi_label_estimate">Estimate</th>
+        <td tal:condition="estimate" tal:content="estimate" />
+        <td tal:condition="not:estimate" i18n:translate="poi_label_novalue">&mdash;</td>
       </tr>
     </table>
 
